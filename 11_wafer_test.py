@@ -27,7 +27,7 @@ my_canvas.pack()
 matrix_iterator = np.nditer(matrix, flags=['multi_index'])
 for x in matrix_iterator:
     index = matrix_iterator.multi_index
-    #print(x, index)
+    # print(x, index)
 
     # top left anchor
     x1 = index[0] * cell_size
@@ -45,16 +45,6 @@ for x in matrix_iterator:
     elif x == '3':
         my_canvas.create_rectangle(x1, y1, x2, y2, fill="gray")
     else:
-        my_canvas.create_rectangle(x1, y1, x2, y2, fill="white")
+        my_canvas.create_rectangle(x1, y1, x2, y2, fill="pink")
 
 root.mainloop()
-
-
-# print(a.shape)
-# with open('mymap.map', 'r') as f:
-#     for line in f:
-#         for char in line:
-#             char.split()
-
-# a = np.loadtxt(fname='mymap.map',dtype=int)
-# print(a)
