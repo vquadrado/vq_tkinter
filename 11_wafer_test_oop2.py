@@ -7,8 +7,9 @@ class MainWindow:
         tk_root.title(name)
 
 
-class MyFrame:
+class MyFrame(tk.LabelFrame):
     def __init__(self, tk_root, name: str, position_index: tuple, padding: tuple):
+        super(MyFrame, self).__init__()
         self.frame = tk.LabelFrame(tk_root, text=name, padx=padding[0], pady=padding[1])
         self.frame.grid(column=position_index[0], row=position_index[1])
 
@@ -22,6 +23,9 @@ class MyFrame:
         canvas = tk.Canvas(self.frame, width=canvas_size[0], height=canvas_size[1], bg=background_color)
         canvas.grid(column=position_index[0], row=position_index[1])
         return canvas
+
+    def create_rectangle(self):
+        pass
 
 
 def build(root):
@@ -38,12 +42,12 @@ def build(root):
     canvas_height = cell_size * matrix.shape[1]
 
     canvas_frame = MyFrame(root, 'wafer test results', (1, 0), (5, 5))
-    canvas_frame.create_canvas(canvas_size=(canvas_width, canvas_height), background_color="white", position_index=(0, 0))
+    canvas_rect_map = canvas_frame.create_canvas(canvas_size=(canvas_width, canvas_height), background_color="white",
+                               position_index=(0, 0))
 
     matrix_iterator = np.nditer(matrix, flags=['multi_index'])
     for x in matrix_iterator:
         index = matrix_iterator.multi_index
-        # print(x, index)
 
         # top left anchor
         x1 = index[0] * cell_size
@@ -51,6 +55,8 @@ def build(root):
         # bottom left anchor
         x2 = (index[0] + 1) * cell_size
         y2 = (index[1] + 1) * cell_size
+
+        canvas_rect_map.create_rectangle(x1, y1, x2, y2)
 
         # if x == '0':
         #     canvas_frame.create_rectangle(x1, y1, x2, y2, fill="red")

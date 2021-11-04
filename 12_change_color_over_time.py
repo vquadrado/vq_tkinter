@@ -54,9 +54,9 @@ def change_color():
 
     my_canvas.itemconfig(rectangles_values[counter], fill=color_list[color_index])
 
-    root.after(10, change_color)
+    root.after(1, change_color)
 
-
+print(rectangles)
 change_color()
 
 root.mainloop()
